@@ -309,7 +309,7 @@ app.use("/api-docs-json",(req,res)=>{
 
 
 
-app.listen(PORTE,()=>{
-    console.log("Servidor express escuchando en el puerto  "+ PORTe);
+app.listen(PORT,()=>{
+    console.log("Servidor express escuchando en el puerto  "+ PORT);
 });
 
