@@ -5,6 +5,6 @@
     "version": "1.0.0"
     },
     "servers":[
-    {"url": "http://localhost:8080",
-    "urls":"https://apiusers-p0ls.onrender.com"}]
+    {
+    "url":"https://apiusers-p0ls.onrender.com"}]
 }
