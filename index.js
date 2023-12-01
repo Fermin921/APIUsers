@@ -24,13 +24,13 @@ const upload = multer({storage:storage})
 app.use(express.urlencoded({extended:true}));
 app.use(upload.single('archivo'));
 
-const PORT = process.env.MYSQLPORT || 8080;
+const PORTE = process.env.MYSQLPORT || 8080;
 const HOST = process.env.MYSQLHOST || 'localhost';
 const USER = process.env.MYSQLUSER || 'root';
 const PASSWORD = process.env.MYSQLPASSWORD || '';
 const DATABASE = process.env.MYSQL_DATABASE || 'login';
 
-const MySqlConnection = {host : HOST, user : USER, password : PASSWORD, database: DATABASE,port : PORT, }
+const MySqlConnection = {host : HOST, user : USER, password : PASSWORD, database: DATABASE,port : PORTE, }
 
 const data = fs.readFileSync(path.join(__dirname,'./Options.json'),{ encoding: 'utf8', flag: 'r' });
 const obj = JSON.parse(data)
@@ -309,7 +309,7 @@ app.use("/api-docs-json",(req,res)=>{
 
 
 
-app.listen(3000,()=>{
+app.listen(PORT,()=>{
     console.log("Servidor express escuchando en el puerto  "+PORT);
 });
 
