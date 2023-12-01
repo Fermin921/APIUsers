@@ -23,8 +23,8 @@ const storage = multer.diskStorage({
 const upload = multer({storage:storage})
 app.use(express.urlencoded({extended:true}));
 app.use(upload.single('archivo'));
-
-const PORTE = process.env.MYSQLPORT || 8080;
+const PORT = process.env.PORT || 8080
+const PORTE = process.env.MYSQLPORT ;
 const HOST = process.env.MYSQLHOST || 'localhost';
 const USER = process.env.MYSQLUSER || 'root';
 const PASSWORD = process.env.MYSQLPASSWORD || '';
@@ -310,6 +310,6 @@ app.use("/api-docs-json",(req,res)=>{
 
 
 app.listen(PORT,()=>{
-    console.log("Servidor express escuchando en el puerto  "+PORT);
+    console.log("Servidor express escuchando en el puerto  "+ PORT);
 });
 
