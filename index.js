@@ -310,6 +310,6 @@ app.use("/api-docs-json",(req,res)=>{
 
 
 app.listen(PORT,()=>{
-    console.log("Servidor express escuchando en el puerto"+PORT);
+    console.log("Servidor express escuchando en el puerto  "+PORT);
 });
 
