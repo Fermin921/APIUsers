@@ -29,8 +29,9 @@ const HOST = process.env.MYSQLHOST || 'localhost';
 const USER = process.env.MYSQLUSER || 'root';
 const PASSWORD = process.env.MYSQLPASSWORD || '';
 const DATABASE = process.env.MYSQL_DATABASE || 'login';
+const URL = process.env.URL
 
-const MySqlConnection = {host : HOST, user : USER, password : PASSWORD, database: DATABASE,}
+const MySqlConnection = {host : HOST, user : USER, password : PASSWORD, database: DATABASE,port : PORTE}
 
 const data = fs.readFileSync(path.join(__dirname,'./Options.json'),{ encoding: 'utf8', flag: 'r' });
 const obj = JSON.parse(data)
