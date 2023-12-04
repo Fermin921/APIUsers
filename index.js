@@ -243,7 +243,7 @@ app.get('/ruta-protegida', auth, (req, res) => {
 app.get("/usuarios/:id",async(req,res)=>{    
 console.log(req.params.id)
 const conn=await mysql.createConnection(MySqlConnection)
-   const[rows,fields]=await conn.query('SELECT * from Usuarios where Tipo='+req.params.id);
+   const[rows,fields]=await conn.query('SELECT * from Usuarios where ID='+req.params.id);
 if(rows.length==0)
 {
     res.status(484).json({mensaje:"Usuario No existe"});
@@ -258,7 +258,7 @@ app.post('/insertar', async (req, res) => {
 
         const { Tipo, Nombre, Contraseña } = req.body;
 
-        const [rows, fields] = await conn.execute('INSERT INTO Usuarios (Tipo, Usuario, Contraseña) VALUES (?, ?, ?)', [Tipo, Nombre, Contraseña]);
+        const [rows, fields] = await conn.execute('INSERT INTO Usuarios (ID, Usuario, Contraseña) VALUES (?, ?, ?)', [Tipo, Nombre, Contraseña]);
 
         res.json({ message: 'Datos insertados correctamente' });
     } catch (error) {
@@ -273,7 +273,7 @@ app.put("/usuario/:Tipo", async (req, res) => {
         const { Usuario, Contraseña } = req.body;
         console.log(Usuario + Contraseña);
         console.log(req.body);
-        await conn.query('UPDATE usuario SET Usuarios = ?, Contraseña = ? WHERE Tipo = ?', [Usuario, Contraseña, req.params.Tipo]);
+        await conn.query('UPDATE usuario SET Usuarios = ?, Contraseña = ? WHERE ID = ?', [Usuario, Contraseña, req.params.Tipo]);
         res.json({ mensaje: "ACTUALIZADO" });
     } catch (err) {
         res.status(500).json({ mensaje: err.sqlMessage });
