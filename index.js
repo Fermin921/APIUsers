@@ -270,7 +270,7 @@ app.put("/usuario/:Tipo", async (req, res) => {
         const { Usuario, Contraseña } = req.body;
         console.log(Usuario + Contraseña);
         console.log(req.body);
-        await conn.query('UPDATE usuarios SET Usuarios = ?, Contraseña = ? WHERE ID = ?', [Usuario, Contraseña, req.params.Tipo]);
+        await conn.query('UPDATE Usuarios SET Usuarios = ?, Contraseña = ? WHERE ID = ?', [Usuario, Contraseña, req.params.Tipo]);
         res.json({ mensaje: "ACTUALIZADO" });
     } catch (err) {
         res.status(500).json({ mensaje: err.sqlMessage });
