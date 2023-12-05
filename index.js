@@ -83,40 +83,40 @@ app.post('/Recibir', (req, res) => {
 *     security:
 *       - BearerAuth: []
 * 
- * /usuarios/{id}:
- *   get:
- *     summary: Obtiene un usuario por ID.
- *     description: Retorna los detalles de un usuario específico según el ID proporcionado.
- *     tags:
- *       - Usuarios
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: ID del usuario a consultar.
- *         schema:
- *           type: integer
- *     responses:
- *       200:
- *         description: Éxito. Retorna los detalles del usuario.
- *         content:
- *           application/json:
- *             example:
- *               id: 1
- *               nombre: Usuario1
- *               email: usuario1@example.com
- *       404:
- *         description: No encontrado. El usuario con el ID proporcionado no existe.
- *         content:
- *           application/json:
- *             example:
- *               mensaje: Usuario no encontrado.
- *       500:
- *         description: Error interno del servidor.
- *         content:
- *           application/json:
- *             example:
- *               mensaje: Error en la base de datos.
+* /usuarios/{id}:
+*   get:
+*     summary: Obtiene un usuario por ID.
+*     description: Retorna los detalles de un usuario específico según el ID proporcionado.
+*     tags:
+*       - Usuarios
+*     parameters:
+*       - in: path
+*         name: id
+*         required: true
+*         description: ID del usuario a consultar.
+*         schema:
+*           type: integer
+*     responses:
+*       200:
+*         description: Éxito. Retorna los detalles del usuario.
+*         content:
+*           application/json:
+*             example:
+*               id: 1
+*               nombre: Usuario1
+*               email: usuario1@example.com
+*       404:
+*         description: No encontrado. El usuario con el ID proporcionado no existe.
+*         content:
+*           application/json:
+*             example:
+*               mensaje: Usuario no encontrado.
+*       500:
+*         description: Error interno del servidor.
+*         content:
+*           application/json:
+*             example:
+*               mensaje: Error en la base de datos.
 *
 * /insertar:
 *   post:
