@@ -56,35 +56,32 @@ app.post('/Recibir', (req, res) => {
 * @swagger
 * /usuarios:
 *   get:
-*     summary: Obtener la lista de usuarios.
-*     description: Obtiene la lista completa de usuarios desde la base de datos.
+*     summary: Obtiene la lista de usuarios.
+*     description: Retorna la lista completa de usuarios almacenados en la base de datos.
 *     tags:
-*       - usuarios
+*       - Usuarios
+*     security:
+*       - BearerAuth: []
 *     responses:
 *       200:
-*         description: Operación exitosa. Devuelve la lista de usuarios.
+*         description: Éxito. Retorna la lista de usuarios.
 *         content:
 *           application/json:
 *             example:
-*               - Tipo: 1
-*                 Nombre: "Usuario1"
-*                 Contraseña: "contraseña1"
-*               - Tipo: 2
-*                 Nombre: "Usuario2"
-*                 Contraseña: "contraseña2"
-*               # ... (otros usuarios)
-*       401:
-*         description: Token inválido. No se proporcionó o no es válido.
-*         content:
-*           application/json:
-*             example:
-*               mensaje: "Token inválido"
+*               - id: 1
+*                 nombre: Usuario1
+*                 email: usuario1@example.com
+*               - id: 2
+*                 nombre: Usuario2
+*                 email: usuario2@example.com
 *       500:
-*         description: Error interno del servidor. No se pudieron obtener los datos.
+*         description: Error interno del servidor.
 *         content:
 *           application/json:
 *             example:
-*               mensaje: "Mensaje de error específico del servidor"
+*               mensaje: Error en la base de datos.
+*     security:
+*       - BearerAuth: []
 * 
 * /usuarios/{id}:
 *   get:
@@ -219,8 +216,6 @@ app.get("/usuarios", async (req, res) => {
             const [rows, fields] = await conn.query('SELECT * from Usuarios');
             res.json(rows);
         
-            //console.log("NO diste bien la key bro");
-            //res.status(401).json({ mensaje: 'Token inválido' });
     } catch (err) {
         res.status(500).json({ mensaje: err.sqlMessage });
     }
@@ -283,7 +278,7 @@ app.put("/usuario/:Tipo", async (req, res) => {
 app.delete("/usuarios/:Tipo", async (req, res) => {    
     try {
         const conn = await mysql.createConnection(MySqlConnection);
-        const [rows, fields] = await conn.query('DELETE FROM Usuarios WHERE Tipo = ?', [req.params.Tipo]);
+        const [rows, fields] = await conn.query('DELETE FROM Usuarios WHERE ID = ?', [req.params.Tipo]);
 
         if (rows.affectedRows == 0) {
             res.json({ mensaje: "Registro No Eliminado" });
