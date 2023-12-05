@@ -209,6 +209,9 @@ app.post('/Recibir', (req, res) => {
  *           application/json:
  *             example:
  *               message: Error al actualizar el usuario.
+ */
+/**
+ * @swagger
  * /usuarios/{Tipo}:
  *   delete:
  *     summary: Elimina un usuario por Tipo.
