@@ -209,6 +209,38 @@ app.post('/Recibir', (req, res) => {
  *           application/json:
  *             example:
  *               message: Error al actualizar el usuario.
+ * /usuarios/{Tipo}:
+ *   delete:
+ *     summary: Elimina un usuario por Tipo.
+ *     description: Elimina un usuario de la base de datos según el Tipo proporcionado.
+ *     tags:
+ *       - Usuarios
+ *     parameters:
+ *       - in: path
+ *         name: Tipo
+ *         required: true
+ *         description: Tipo del usuario a eliminar.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Éxito. Registro eliminado correctamente.
+ *         content:
+ *           application/json:
+ *             example:
+ *               mensaje: Registro Eliminado
+ *       404:
+ *         description: No encontrado. El usuario con el Tipo proporcionado no existe.
+ *         content:
+ *           application/json:
+ *             example:
+ *               mensaje: Registro No Eliminado
+ *       500:
+ *         description: Error interno del servidor.
+ *         content:
+ *           application/json:
+ *             example:
+ *               mensaje: Mensaje de error específico en la base de datos.
  */
 app.get("/usuarios", async (req, res) => {    
     try {
