@@ -52,179 +52,139 @@ app.post('/Recibir', (req, res) => {
     const { tipo, usuario, contraseña } = req.body;
     res.json({ mensaje: 'Datos recibidos exitosamente \n Tipo: '+tipo + '\n Usuario: ' + usuario + '\ Contraseña: '+contraseña });
 });
-/** 
-* @swagger
-* /usuarios:
-*   get:
-*     summary: Obtiene la lista de usuarios.
-*     description: Retorna la lista completa de usuarios almacenados en la base de datos.
-*     tags:
-*       - Usuarios
-*     security:
-*       - BearerAuth: []
-*     responses:
-*       200:
-*         description: Éxito. Retorna la lista de usuarios.
-*         content:
-*           application/json:
-*             example:
-*               - id: 1
-*                 nombre: Usuario1
-*                 email: usuario1@example.com
-*               - id: 2
-*                 nombre: Usuario2
-*                 email: usuario2@example.com
-*       500:
-*         description: Error interno del servidor.
-*         content:
-*           application/json:
-*             example:
-*               mensaje: Error en la base de datos.
-*     security:
-*       - BearerAuth: []
-* 
-* /usuarios/{id}:
-*   get:
-*     summary: Obtiene un usuario por ID.
-*     description: Retorna los detalles de un usuario específico según el ID proporcionado.
-*     tags:
-*       - Usuarios
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: ID del usuario a consultar.
-*         schema:
-*           type: integer
-*     responses:
-*       200:
-*         description: Éxito. Retorna los detalles del usuario.
-*         content:
-*           application/json:
-*             example:
-*               id: 1
-*               nombre: Usuario1
-*               email: usuario1@example.com
-*       404:
-*         description: No encontrado. El usuario con el ID proporcionado no existe.
-*         content:
-*           application/json:
-*             example:
-*               mensaje: Usuario no encontrado.
-*       500:
-*         description: Error interno del servidor.
-*         content:
-*           application/json:
-*             example:
-*               mensaje: Error en la base de datos.
-*
-* /insertar:
-*   post:
-*     summary: Insertar un nuevo usuario.
-*     description: Inserta un nuevo usuario en la base de datos.
-*     tags:
-*       - usuarios
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             type: object
-*             properties:
-*               Tipo:
-*                 type: integer
-*                 description: Tipo de usuario.
-*               Nombre:
-*                 type: string
-*                 description: Nombre del usuario.
-*               Contraseña:
-*                 type: string
-*                 description: Contraseña del usuario.
-*     responses:
-*       200:
-*         description: Datos insertados correctamente.
-*         content:
-*           application/json:
-*             example:
-*               message: "Datos insertados correctamente"
-*       500:
-*         description: Error interno del servidor. No se pudieron insertar los datos.
-*         content:
-*           application/json:
-*             example:
-*               message: "Error al insertar datos"
-* /usuario/{Tipo}:
-*   put:
-*     summary: "Actualiza un usuario por Tipo"
-*     description: "Actualiza la información de un usuario en la base de datos."
-*     tags:
-*       - usuarios
-*     parameters:
-*       - in: path
-*         name: Tipo
-*         description: "Tipo del usuario que se va a actualizar."
-*         required: true
-*         schema:
-*           type: string
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             type: object
-*             properties:
-*               Usuario:
-*                 type: string
-*                 description: "Nuevo nombre de usuario."
-*               Contraseña:
-*                 type: string
-*                 description: "Nueva contraseña del usuario."
-*     responses:
-*       200:
-*         description: "OK. La actualización se realizó con éxito."
-*         content:
-*           application/json:
-*             example:
-*               mensaje: "ACTUALIZADO"
-*       500:
-*         description: "Error interno del servidor."
-*         content:
-*           application/json:
-*             example:
-*               mensaje: "Error SQL."
-* /usuarios/{Tipo}:
-*   delete:
-*     summary: "Elimina un usuario por Tipo"
-*     description: "Elimina un usuario de la base de datos según el Tipo proporcionado."
-*     tags:
-*       - usuarios
-*     parameters:
-*       - in: path
-*         name: Tipo
-*         description: "Tipo del usuario que se va a eliminar."
-*         required: true
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: "OK. El usuario ha sido eliminado."
-*         content:
-*           application/json:
-*             example:
-*               mensaje: "Registro Eliminado"
-*       404:
-*         description: "No se encontró el usuario a eliminar."
-*         content:
-*           application/json:
-*             example:
-*               mensaje: "Registro No Eliminado"
-*       500:
-*         description: "Error interno del servidor."
-*         content:
-*           application/json:
-*             example:
-*               mensaje: "Error SQL."
-*/
+/**
+ * @swagger
+ * /usuarios:
+ *   get:
+ *     summary: Obtiene la lista de usuarios.
+ *     description: Retorna la lista completa de usuarios almacenados en la base de datos.
+ *     tags:
+ *       - Usuarios
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Éxito. Retorna la lista de usuarios.
+ *         content:
+ *           application/json:
+ *             example:
+ *               - id: 1
+ *                 nombre: Usuario1
+ *                 email: usuario1@example.com
+ *               - id: 2
+ *                 nombre: Usuario2
+ *                 email: usuario2@example.com
+ *       500:
+ *         description: Error interno del servidor.
+ *         content:
+ *           application/json:
+ *             example:
+ *               mensaje: Error en la base de datos.
+ * /ruta-protegida:
+ *   get:
+ *     summary: Ruta protegida que requiere autenticación básica.
+ *     description: Ruta que solo permite el acceso si se proporcionan credenciales de autenticación básica.
+ *     tags:
+ *       - Usuarios
+ *     security:
+ *       - BasicAuth: []
+ *     responses:
+ *       200:
+ *         description: Éxito. Acceso permitido.
+ *         content:
+ *           text/plain:
+ *             example: ¡Acceso permitido!
+ *       401:
+ *         description: No autorizado. Las credenciales de autenticación son incorrectas.
+ *         content:
+ *           text/plain:
+ *             example: Acceso no autorizado
+ * /usuarios/{id}:
+ *   get:
+ *     summary: Obtiene un usuario por ID.
+ *     description: Retorna los detalles de un usuario específico según el ID proporcionado.
+ *     tags:
+ *       - Usuarios
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID del usuario a consultar.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Éxito. Retorna los detalles del usuario.
+ *         content:
+ *           application/json:
+ *             example:
+ *               id: 1
+ *               nombre: Usuario1
+ *               email: usuario1@example.com
+ *       404:
+ *         description: No encontrado. El usuario con el ID proporcionado no existe.
+ *         content:
+ *           application/json:
+ *             example:
+ *               mensaje: Usuario no encontrado.
+ *       500:
+ *         description: Error interno del servidor.
+ *         content:
+ *           application/json:
+ *             example:
+ *               mensaje: Error en la base de datos.
+ * /insertar:
+ *   post:
+ *     summary: Inserta un nuevo usuario.
+ *     description: Inserta un nuevo usuario en la base de datos con la información proporcionada.
+ *     tags:
+ *       - Usuarios
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           example:
+ *             Tipo: 1
+ *             Nombre: NuevoUsuario
+ *             Contraseña: NuevaContraseña
+ *     responses:
+ *       200:
+ *         description: Éxito. Datos insertados correctamente.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Datos insertados correctamente.
+ *       500:
+ *         description: Error interno del servidor.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Error al insertar datos.
+ *  /usuario/{Tipo}:
+ *   put:
+ *     summary: Actualiza un usuario por Tipo.
+ *     description: Actualiza la información de un usuario específico según el Tipo proporcionado.
+ *     tags:
+ *       - Usuarios
+ *     parameters:
+ *       - in: path
+ *         name: Tipo
+ *         required: true
+ *         description: Tipo del usuario a actualizar.
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           example:
+ *             Usuario: UsuarioActualizado
+ *             Contraseña: ContraseñaActualizada
+ *     responses:
+ *       200:
+ *         description: Éxito. Usuario actualizado correctamente.
+ *         content
+ * */
 app.get("/usuarios", async (req, res) => {    
     try {
         const token = req.token;
