@@ -80,6 +80,10 @@ app.post('/Recibir', (req, res) => {
  *           application/json:
  *             example:
  *               mensaje: Error en la base de datos.
+ */
+
+/**
+ * @swagger
  * /ruta-protegida:
  *   get:
  *     summary: Ruta protegida que requiere autenticación básica.
@@ -99,6 +103,10 @@ app.post('/Recibir', (req, res) => {
  *         content:
  *           text/plain:
  *             example: Acceso no autorizado
+ */
+
+/**
+ * @swagger
  * /usuarios/{id}:
  *   get:
  *     summary: Obtiene un usuario por ID.
@@ -133,6 +141,10 @@ app.post('/Recibir', (req, res) => {
  *           application/json:
  *             example:
  *               mensaje: Error en la base de datos.
+ */
+
+/**
+ * @swagger
  * /insertar:
  *   post:
  *     summary: Inserta un nuevo usuario.
@@ -160,7 +172,11 @@ app.post('/Recibir', (req, res) => {
  *           application/json:
  *             example:
  *               message: Error al insertar datos.
- *  /usuario/{Tipo}:
+ */
+
+/**
+ * @swagger
+ * /usuario/{Tipo}:
  *   put:
  *     summary: Actualiza un usuario por Tipo.
  *     description: Actualiza la información de un usuario específico según el Tipo proporcionado.
@@ -183,8 +199,17 @@ app.post('/Recibir', (req, res) => {
  *     responses:
  *       200:
  *         description: Éxito. Usuario actualizado correctamente.
- *         content
- * */
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Usuario actualizado correctamente.
+ *       500:
+ *         description: Error interno del servidor.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Error al actualizar el usuario.
+ */
 app.get("/usuarios", async (req, res) => {    
     try {
         const token = req.token;
